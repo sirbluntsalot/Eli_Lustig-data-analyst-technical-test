@@ -1,8 +1,3 @@
-# 📊 Data Sources & Datasets
-
-This repository contains several seed and master datasets used for electoral analysis and reporting. Below is a description of each file and its origin.
-
----
 
 ## 🗂️ Seed Files
 
