@@ -2,9 +2,26 @@ version: 2
 
 models:
   - name: core__donations
+    description: "The master, unified list of all specific incoming donations and merch purchases across all platforms (ActBlue, Shopify, etc.)."
     columns:
       - name: wdl_transaction_id
-        description: ""
+        description: "The unique ID for this specific transaction, guaranteed to be unique across all platforms. Think of this as the single source of truth receipt number."
         data_tests:
           - unique
           - not_null
+      - name: contribution_platform
+        description: "The name of the platform where the transaction took place (e.g., 'ActBlue' for donations or 'Shopify' for merchandise)."
+      - name: et_created_at
+        description: "The exact date and time the donation or purchase was made, standardized to Eastern Time for consistent reporting."
+      - name: amount
+        description: "The original dollar amount of the donation before any refunds were issued."
+      - name: post_refund_amount
+        description: "The final dollar amount of the donation, after subtracting any money that was refunded back to the donor."
+      - name: is_recurring
+        description: "A simple true or false flag showing if this specific transaction is part of a repeating (e.g., monthly) subscription."
+      - name: recurring_type
+        description: "A category label that tells us if this donation is 'One-time', a 'New' recurring signup, or a charge from an 'Existing' subscription."
+      - name: likely_source_type
+        description: "Our best educated guess on which exact marketing channel drove this donation (e.g., Email, Ads, Texting). Used to evaluate performance across the campaign."
+      - name: email
+        description: "The donor's email address, which is the primary way we identify unique, individual people across different transactions."

@@ -1,3 +1,18 @@
+/*
+  What this file does:
+  This is our master table for all incoming money. It gathers the perfectly cleaned 
+  data from all our separate platforms (like ActBlue donations and Shopify merchandise 
+  sales) and stacks them securely together into one single, unified list. It makes sure 
+  that a "Shopify order" matches the exact same format as an "ActBlue donation" so they 
+  can live in harmony in the same table.
+
+  How it fits into the directory:
+  This is the final destination for all our raw data preparation. Whenever we want 
+  to build a dashboard or pull a report about "total revenue" or "donations by day", 
+  we will query THIS file, because it represents the complete, unified picture of our 
+  finances across all platforms.
+*/
+
 {%- set schema_pattern = 'dbt_%' -%}
 {%- set precore_table_name = 'precore_shopify__orders_v2' -%}
 {%- set shopify_tables = get_precore_tables(schema_pattern, precore_table_name, schema_exclude=['dbt_precore'], model_exclude=['precore_shopify__orders_v1']) -%}
@@ -14,6 +29,7 @@ WITH
 
     actblue AS (
         SELECT
+            'ActBlue' AS contribution_platform, /* Tells us this money came from an ActBlue donation */
             wdl_client_code,
             wdl_transaction_id,
             lineitem_id AS transaction_id,
@@ -74,6 +90,7 @@ WITH
 
     shopify AS (
         SELECT
+            'Shopify' AS contribution_platform, /* Tells us this money came from a Shopify merchandise order */
             wdl_client_code,
             wdl_transaction_id,
             order_id AS transaction_id,

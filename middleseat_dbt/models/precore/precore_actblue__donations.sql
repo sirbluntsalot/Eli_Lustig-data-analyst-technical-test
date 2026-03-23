@@ -1,3 +1,19 @@
+/*
+  What this file does:
+  This file takes raw, messy donation data directly from ActBlue and cleans it up. 
+  It adds helpful context to each donation, such as identifying the specific client, 
+  standardizing all timestamps to Eastern Time, and labeling whether a donation was 
+  "New", "Existing", or "One-time". It also uses our helper functions (like 
+  `likely_source_type`) to guess where the donation came from if that info is missing, 
+  and applies "finance exclusions" to filter out specific transactions if needed.
+
+  How it fits into the directory:
+  This is a "pre-core" or intermediate step. It prepares ActBlue-specific data so 
+  that it's perfectly formatted and ready to be merged into our final, master 
+  donations table (`core__donations`) later on. If we had other platforms 
+  (like NGP or ActionKit), they would have their own similar "pre-core" files.
+*/
+
 {{
     config(
         dist='wdl_transaction_id',

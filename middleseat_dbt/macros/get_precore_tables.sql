@@ -1,3 +1,18 @@
+/* 
+  What this file does: 
+  This is a helper function (macro) that acts like a search engine for our database. 
+  Instead of us manually typing out the name of every single data table we want to use, 
+  we give this function a pattern (like "find all tables that end in '_donations'"). 
+  It then scans the database, finds all matching tables, and returns a tidy list of them.
+
+  How it fits into the directory:
+  This is incredibly useful when we have data coming from many different sources (like 
+  ActBlue, NGP, etc.) that all result in their own separate tables. Other reports can 
+  use this function to automatically gather all those separate tables together so they 
+  can be combined into one massive master table, without needing manual updates 
+  every time a new data source is added.
+*/
+
 {%- macro get_precore_tables(schema_pattern, model_name, schema_exclude=[], model_include=[], model_exclude=[]) -%}
 
 {%- if execute -%}
