@@ -18,8 +18,3 @@ These files provide foundational reference data used to build the larger dataset
 | `Master_Data_Report.csv` | Mock dataset powering the [Looker Studio](https://lookerstudio.google.com) dashboard. Consolidates seed data into a unified reporting layer. |
 
 ---
-
-## ⚠️ Notes
-
-- `seed_primary_calendar.csv` is **not** based on official 2028 primary dates — it is an informed projection extrapolated from historical primary scheduling patterns.
-- `Master_Data_Report.csv` is a **mock dataset** intended for demonstration and dashboard development purposes only.
