@@ -1,3 +1,22 @@
+/*
+  Model: reporting__donations_by_category_by_day
+  
+  Description:
+  This reporting model serves as the primary data source for the Benito for President (BFP) 2028 Dashboard. 
+  It aggregates granular donation records into a day-by-day, category-by-category view for longitudinal 
+  campaign analysis.
+
+  Larger Context:
+  1. Base Layer: Pulls from `core__donations` (cleaned donation records).
+  2. Enrichment: Joins with campaign seed files:
+     - `seed_income_zip_data`: maps zip codes to household income brackets.
+     - `seed_2024_election_states`: adds electoral category (Blue/Red/Swing) and 2024 winner.
+     - `seed_primary_calendar`: associates each state with its 2028 primary election date.
+  3. Output: Produces the daily 'Raised' metrics (dollars and counts) used to track momentum around 
+     key dates like Super Tuesday.
+*/
+
+
 {{
     config(
         dist='wdl_client_code',
